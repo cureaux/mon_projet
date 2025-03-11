@@ -6,4 +6,13 @@ body { background-color: lightgrey; }
 	color: white;
 	padding: 10px;
 	text-align: center;
+	border-radius: 5px;
+}
+.menu ul {
+	list-style-type: none;
+	padding: 0;
+}
+.menu li {
+	display: inline;
+	margin: 10px;
 }
