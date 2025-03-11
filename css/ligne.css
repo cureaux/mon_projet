@@ -10,4 +10,26 @@ body { background-color: lightgrey; }
 }
 #copyright:hover {
 	color: grey;
+.menu {
+	background-color: #b0e57c;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5px;
+}
+.menu ul {
+	list-style-type: none;
+	padding: 0;
+}
+.menu li {
+	display: inline;
+	margin: 10px;
+}
+.menu a {
+	text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+.menu a:hover {
+	color: yellow;
 }
