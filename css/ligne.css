@@ -16,3 +16,11 @@ body { background-color: lightgrey; }
 	display: inline;
 	margin: 10px;
 }
+.menu a {
+	text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+.menu a:hover {
+	color: yellow;
+}
