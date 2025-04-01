@@ -28,3 +28,9 @@ jobs:
           find site/img -type f ! \( -name "*.png" -o -name "*.jpg" \) | grep . && exit 1 || echo "OK: img"
           find site/css -type f ! -name "*.css" | grep . && exit 1 || echo "OK: css"
           find site/js -type f ! -name "*.js" | grep . && exit 1 || echo "OK: js"
+      - name: Vérifier si composer.json existe
+         run: |
+          if [ ! -f "composer.json" ]; then
+            echo "composer.json est manquant !"
+            exit 1
+          fi
