@@ -1,0 +1,28 @@
+name: CI - Lint et Vérification
+
+on: [push, pull_request]
+
+jobs:
+  lint-php:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug - Vérifier PHPCS
+        run: which phpcs || echo "PHPCS non trouvé"
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4.5'
+          tools: phpcs
+
+      - name: List files
+        run: ls -la
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest
+
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --standard=PSR12 src/
