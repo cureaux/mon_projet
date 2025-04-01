@@ -9,6 +9,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug - Vérifier PHPCS
+        run: which phpcs || echo "PHPCS non trouvé"
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
