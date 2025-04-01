@@ -1,0 +1,47 @@
+name: Vérification arborescence
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  check-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Vérifier l'arborescence des dossiers
+        run: |
+          tree -d -L 2
+          if [ ! -d "site" ] || [ ! -d "site/img" ] || [ ! -d "site/css" ] || [ ! -d "site/js" ] || [ ! -d "src" ]; then
+            echo "❌ L'arborescence du projet est incorrecte !" && exit 1
+          fi
+
+      - name: Vérifier les extensions des fichiers
+        run: |
+          # Vérifie que "site" ne contient que des .html ou .php
+          if find site -maxdepth 1 -type f ! -name "*.html" ! -name "*.php" | grep -q .; then
+            echo "❌ 'site' contient des fichiers non .html ou .php !" && exit 1
+          fi
+
+          # Vérifie que "img" ne contient que des .png ou .jpg
+          if find site/img -type f ! -name "*.png" ! -name "*.jpg" | grep -q .; then
+            echo "❌ 'img' contient des fichiers non .png ou .jpg !" && exit 1
+          fi
+
+          # Vérifie que "css" ne contient que des .css
+          if find site/css -type f ! -name "*.css" | grep -q .; then
+            echo "❌ 'css' contient des fichiers non .css !" && exit 1
+          fi
+
+          # Vérifie que "js" ne contient que des .js
+          if find site/js -type f ! -name "*.js" | grep -q .; then
+            echo "❌ 'js' contient des fichiers non .js !" && exit 1
+          fi
+
+      - name: ✅ Vérification terminée
+        run: echo "Tout est correct !"
