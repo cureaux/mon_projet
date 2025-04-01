@@ -1,0 +1,28 @@
+name: Vérification Arborescence
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  check_structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Vérifier l'arborescence
+        run: |
+          # Vérification des dossiers
+          [ -d "site/img" ] || { echo "❌ Dossier site/img manquant"; exit 1; }
+          [ -d "site/css" ] || { echo "❌ Dossier site/css manquant"; exit 1; }
+          [ -d "site/js" ] || { echo "❌ Dossier site/js manquant"; exit 1; }
+          [ -d "src" ] || { echo "❌ Dossier src manquant"; exit 1; }
+          
+          # Vérification des types de fichiers
+          find site -type f ! -name "*.html" ! -name "*.php" -exec echo "❌ Fichier non autorisé dans site : {}" \; && exit 1 || true
+          find site/img -type f ! -name "*.png" ! -name "*.jpg" -exec echo "❌ Fichier non autorisé dans img : {}" \; && exit 1 || true
+          find site/css -type f ! -name "*.css" -exec echo "❌ Fichier non autorisé dans css : {}" \; && exit 1 || true
+          find site/js -type f ! -name "*.js" -exec echo "❌ Fichier non autorisé dans js : {}" \; && exit 1 || true
