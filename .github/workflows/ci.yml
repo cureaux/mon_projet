@@ -1,13 +1,22 @@
-name: Liste de fichier avec Push
+name: CI - Lint et Vérification
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  list-files:
+  lint-php:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repertoire
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Liste de fichier
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4.5'
+          tools: phpcs
+
+      - name: List files
         run: ls -la
+
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --standard=PSR12 src/
