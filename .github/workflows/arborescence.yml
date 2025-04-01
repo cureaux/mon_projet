@@ -43,3 +43,4 @@ jobs:
           fi
 
           echo "✅ Vérification réussie !"
+# Force update
