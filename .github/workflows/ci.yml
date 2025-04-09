@@ -14,7 +14,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.5'
-          tools: phpcs, phpunit
+          tools: phpunit
 
       - name: Install dependencies
         run: composer install --no-progress --no-suggest
@@ -23,7 +23,7 @@ jobs:
         run: composer global require squizlabs/php_codesniffer
 
       - name: Add Composer global bin to PATH
-        run: echo "::add-path::$(composer global config --absolute home)/vendor/bin"
+        run: echo "${{ github.workspace }}/vendor/bin" >> $GITHUB_ENV
 
       - name: Run PHPCS
         run: phpcs --standard=PSR12 src/  # Vérifie la conformité du code
