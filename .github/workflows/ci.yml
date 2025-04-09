@@ -16,17 +16,22 @@ jobs:
           php-version: '8.4.5'
           tools: phpcs, phpunit
 
-      - name: Debug - Vérifier PHPCS
-        run: which phpcs || echo "PHPCS non trouvé"
+      - name: Check PHP version
+        run: php -v  # Vérifie que PHP est bien installé
+
+      - name: Debug - Vérifier PHPCS et PHPUnit
+        run: |
+          which phpcs || echo "PHPCS non trouvé"
+          which phpunit || echo "PHPUnit non trouvé"
 
       - name: List files
-        run: ls -la
+        run: ls -la  # Liste les fichiers dans le répertoire courant
 
       - name: Install dependencies
         run: composer install --no-progress --no-suggest
 
       - name: Run PHPCS
-        run: vendor/bin/phpcs --standard=PSR12 src/
+        run: vendor/bin/phpcs --standard=PSR12 src/  # Vérifie la conformité du code
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --coverage-html coverage
+        run: vendor/bin/phpunit --coverage-html coverage  # Exécute les tests et génère un rapport de couverture
