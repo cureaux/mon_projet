@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php">
-    <coverage processUncoveredFiles="true">
+    <!-- Supprimez ou commentez la section coverage si vous ne voulez pas l'utiliser -->
+    <!-- 
+    <coverage>
         <include>
             <file>src/</file>
         </include>
     </coverage>
+    -->
 </phpunit>
