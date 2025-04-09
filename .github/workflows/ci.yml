@@ -1,6 +1,7 @@
 name: CI - Lint et Vérification
 
-on: [push, pull_request]
+on: 
+  [push, pull_request]
 
 jobs:
   lint-php:
@@ -9,14 +10,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug - Vérifier PHPCS
-        run: which phpcs || echo "PHPCS non trouvé"
-
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.5'
-          tools: phpcs
+          tools: phpcs, phpunit
+
+      - name: Debug - Vérifier PHPCS
+        run: which phpcs || echo "PHPCS non trouvé"
 
       - name: List files
         run: ls -la
@@ -26,3 +27,6 @@ jobs:
 
       - name: Run PHPCS
         run: vendor/bin/phpcs --standard=PSR12 src/
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --coverage-html coverage
