@@ -14,13 +14,22 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.5'
-          tools: phpunit, phpcs  # Assurez-vous d'inclure les outils nécessaires
+          tools: phpcs, phpunit
+
+      - name: Change permissions for PHPCS
+        run: chmod +x vendor/bin/phpcs
+
+      - name: Debug - Vérifier PHPCS
+        run: which phpcs || echo "PHPCS non trouvé"
+
+      - name: List files
+        run: ls -la
 
       - name: Install dependencies
         run: composer install --no-progress --no-suggest
 
       - name: Run PHPCS
-        run: vendor/bin/phpcs --standard=PSR12 src/ || echo "PHPCS n'a pas pu s'exécuter"
+        run: vendor/bin/phpcs --standard=PSR12 src/
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --coverage-html coverage || echo "PHPUnit n'a pas pu s'exécuter"
+        run: vendor/bin/phpunit --coverage-html coverage

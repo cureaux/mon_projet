@@ -3,7 +3,7 @@
         'name' => 'camro/mon_projet',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1542c5f54ce335ea35b1044e07a765405f315264',
+        'reference' => '49b3ca34b20e14b798d04337166b8b24c936965e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'camro/mon_projet' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1542c5f54ce335ea35b1044e07a765405f315264',
+            'reference' => '49b3ca34b20e14b798d04337166b8b24c936965e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
